@@ -1,7 +1,9 @@
 class Board
+  attr_accessor :rows
+
   def initialize
   #   @player = player
-      @rows = Array.new(10) {Array.new(10)}
+      @rows = Array.new(10) {Array.new(10) {''} }
   end
   
   def owner
@@ -14,8 +16,20 @@ class Board
   # just hitting the water.
 
   def register_shot_at_coordinates(x, y)
-    @rows[x][y] = 'o'
+    case @rows[x][y]
+    when ''
+      @rows[x][y] = 'o'
+    when 's'
+      @rows[x][y] = 'x'
+    when 'x'
+      raise 'You already hit that spot'
+    when 'o'
+      raise 'You already hit that spot'  
+    end
+
   end
+
+
 
   # This method returns an array containing 10 arrays with 10 
   # elements each where:
@@ -26,9 +40,6 @@ class Board
   # you can change the representations as you please, but make sure
   # that you have
   # four different types
-  def rows
-    @rows
-  end
 
 #     # This method returns an array containing 10 arrays with 10
 #   # elements each (as in rows) replacing the ships with an empty
