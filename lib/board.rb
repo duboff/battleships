@@ -51,6 +51,8 @@ class Board
 
     rows[3][8] = 's'
     rows[4][8] = 's'
+
+  end
       
       
   #   ships.each do |ship|
