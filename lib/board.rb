@@ -99,6 +99,10 @@ class Board
 
   end
 
+  def empty_the_board
+    rows.map! {|row| row.map! {|cell| '' } }
+  end
+
 
 
   # This method returns an array containing 10 arrays with 10 
@@ -116,11 +120,11 @@ class Board
   # string ('') so that your opponent cannot see your ships.
 
   def opponent_view
-    board = rows
-    board.each do |row|
+    board1 = rows.clone
+    board1.each do |row|
       row.each { |cell| cell.gsub!('s', '') }
     end
-    board
+    board1
   end
 
 end

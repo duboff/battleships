@@ -5,27 +5,32 @@ describe Board do
   let(:board) {Board.new(Player.new('Bob'))}
 
   it 'knows a shot at the empty space is a shot in the water' do 
+    board.empty_the_board
     board.register_shot [0, 0] 
     expect(board.rows[0][0]).to eq 'o'
   end
 
   it 'should know when it has hit a ship' do
+    board.empty_the_board
     board.rows[1][1] = 's'
     board.register_shot [1,1]
     expect(board.rows[1][1]).to eq 'x'
   end
 
   it 'know when oponent tries to hit a square they already hit' do 
+    board.empty_the_board
     board.rows[2][2] = 'x'
     expect(lambda { board.register_shot [2,2] }).to raise_error(RuntimeError)
   end
 
   it 'know when oponent tries to hit a square they already hit' do 
+    board.empty_the_board
     board.rows[1][2] = 'o'
     expect(lambda { board.register_shot [1,2] }).to raise_error(RuntimeError)
   end
 
   it "doesn't show the ships to the opponent" do 
+    board.empty_the_board
     board.rows[1][1] = 's'
     expect(board.opponent_view[1][1]).to eq ''
   end
@@ -63,9 +68,20 @@ describe Board do
     expect(board.ships[0].coords).not_to be_empty
   end
   
-  it 'knows where the ship is placed' do 
+  xit 'knows where the ship is placed' do 
     board.place_ships
     expect(board.rows.flatten.count('s')).to eq 20
+  end
+
+  it "shouldn't modify my board when look at opponent's board" do 
+    rows1 = board.rows.dup
+    board.opponent_view
+    expect(board.rows).to eq rows1
+  end
+
+  it 'should be able to empty the board' do 
+    board.empty_the_board
+    expect(board.rows.flatten.count('s')).to eq 0
   end
 
 end

@@ -20,6 +20,7 @@ describe Player do
   end
 
   it "should know when all ships are sunk" do
+   bob.board.empty_the_board
    bob.board.rows[1][1] = 's'
    bob.board.rows[1][2] = 's' 
    bob.board.rows[1][3] = 's'
