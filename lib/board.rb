@@ -120,7 +120,7 @@ class Board
   # string ('') so that your opponent cannot see your ships.
 
   def opponent_view
-    rows.map {|row| row.map {|cell| cell.gsub!('s', '') } }
+    rows.map {|row| row.map {|cell| cell.gsub('s', '') } }
   end
 
 end
