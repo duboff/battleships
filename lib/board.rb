@@ -120,11 +120,7 @@ class Board
   # string ('') so that your opponent cannot see your ships.
 
   def opponent_view
-    board1 = rows.clone
-    board1.each do |row|
-      row.each { |cell| cell.gsub!('s', '') }
-    end
-    board1
+    rows.map {|row| row.map {|cell| cell.gsub!('s', '') } }
   end
 
 end
