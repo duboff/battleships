@@ -1,5 +1,9 @@
+require_relative "./ship.rb"
+
 class Board
-  attr_accessor :rows, :ships, :player
+  attr_reader :player
+  attr_accessor :rows, :ships
+
 
   def initialize player
       @player = player
@@ -14,6 +18,58 @@ class Board
   def fill_ships
     [1,1,1,1,2,2,2,3,3,4].map {|size| Ship.new(size) }
   end
+
+  def place_ship
+    # loop through ships, put it randomly on a board, check that position is legal and move on
+    # ship = ships[0]
+    
+    # ships.each do |ship|
+    rows[0][0] = 's'
+    rows[5][7] = 's'
+    rows[3][3] = 's'
+    rows[4][4] = 's'
+
+    rows[9][0] = 's'
+    rows[9][1] = 's'
+    rows[9][2] = 's'
+    rows[9][3] = 's'
+
+    rows[7][1] = 's'
+    rows[7][2] = 's'
+    rows[7][3] = 's'
+
+    rows[0][9] = 's'
+    rows[1][9] = 's'
+    rows[2][9] = 's'
+
+    rows[7][8] = 's'
+    rows[8][8] = 's'
+
+    rows[2][1] = 's'
+    rows[3][1] = 's'  
+
+    rows[3][8] = 's'
+    rows[4][8] = 's'
+    
+    #   ship_coords = []
+    #   ship_coords << [rand(10), rand(10)]
+    #   (ship.size-1).times do
+    #   ship_coords << [ship_coords.last[0] + 1, ship_coords.last[1]]  if ship.vertical?
+    #   ship_coords << [ship_coords.last[0], ship_coords.last[1] + 1] if ship.horizontal?
+    #   end
+    #   # ship_coords.each do |coord|
+    #   #   if rows[coord[0]][coord[1]] == 's' 
+    #   # end
+    #   # if rows[coords[0]][coords[1]] == 's'
+      
+    #   # ship.coords += ship_coords
+
+
+    #   ship_coords.each {|coords| rows[coords[0]][coords[1]] = 's' }
+ 
+    # end
+  end
+
 
   # This method should register the shot at the coordinates passed
   # hitting a ship or
@@ -60,6 +116,5 @@ class Board
 
 end
 
+# board = Board.new(Player.new('Bob'))
 
-# board = Board.new
-# p board.rows

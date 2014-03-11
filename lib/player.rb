@@ -32,6 +32,8 @@ class Player
     opponent_board.register_shot at_coordinates
   end
 
+
+
 end
 
 # player = Player.new('Bob')
