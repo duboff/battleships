@@ -30,23 +30,28 @@ describe Board do
     expect(board.opponent_view[1][1]).to eq ''
   end
 
-  it 'should have 1 carrier' do 
-    carriers = board.ships.count {|ship| ship.size == 5}
+  it 'should have 0 carrier' do 
+    carriers = board.ships.count {|ship| ship.size == 4}
     expect(carriers).to eq 1
   end
 
-  it 'should have 2 destroyers' do
-    destroyers = board.ships.count {|ship| ship.size == 4}
+  it 'should have 1 destroyers' do
+    destroyers = board.ships.count {|ship| ship.size == 3}
     expect(destroyers).to eq 2
   end
 
-  it 'should have 3 submrines' do
-    submarines = board.ships.count {|ship| ship.size == 3}
+  it 'should have 2 submrines' do
+    submarines = board.ships.count {|ship| ship.size == 2}
     expect(submarines).to eq 3
   end
 
-  it 'should have 4 gunboats' do
-    gunboats = board.ships.count {|ship| ship.size == 2}
+  it 'should have 3 gunboats' do
+    gunboats = board.ships.count {|ship| ship.size == 1}
     expect(gunboats).to eq 4
   end
+
+  it "knows player's name" do 
+    expect(board.owner).to eq 'Bob'
+  end
+
 end

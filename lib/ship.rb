@@ -1,16 +1,10 @@
 class Ship
 
+  attr_reader :size, :direction
+
   def initialize(size)
     @size = size
     @direction = rand(2)
-  end
-
-  def size
-    @size
-  end
-
-  def direction
-    @direction
   end
 
   def horizonal?

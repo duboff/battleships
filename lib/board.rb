@@ -1,18 +1,19 @@
 class Board
-  attr_accessor :rows, :ships
+  attr_accessor :rows, :ships, :player
 
   def initialize player
       @player = player
-      @rows = Array.new(10) {Array.new(10) {''} }
-      @ships = [Ship.new(5), Ship.new(4), Ship.new(4), Ship.new(3), Ship.new(3), Ship.new(3), Ship.new(2), Ship.new(2), Ship.new(2), Ship.new(2)]A
+      @rows = Array.new(10) { Array.new(10, '') }
+      @ships = fill_ships
   end
   
   def owner
-    @player.name
+    player.name
   end
 
-
-  
+  def fill_ships
+    [1,1,1,1,2,2,2,3,3,4].map {|size| Ship.new(size) }
+  end
 
   # This method should register the shot at the coordinates passed
   # hitting a ship or
