@@ -54,13 +54,17 @@ describe Board do
     expect(board.owner).to eq 'Bob'
   end
 
-  it 'can place 1 ship' do 
-    board.place_ship
+  # it 'can place 1 ship' do 
+  #   board.place_ships
+  #   expect(board.ships[0].coords).not_to be_empty
+  # end
+  it 'knows where the ship is placed' do 
+    board.ships[0].coords << board.get_ship_coords(board.ships[0])
     expect(board.ships[0].coords).not_to be_empty
   end
-
+  
   it 'knows where the ship is placed' do 
-    board.place_ship
+    board.place_ships
     expect(board.rows.flatten.count('s')).to eq 20
   end
 

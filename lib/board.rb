@@ -9,6 +9,7 @@ class Board
       @player = player
       @rows = Array.new(10) { Array.new(10, '') }
       @ships = fill_ships
+      place_ships
   end
   
   def owner
@@ -19,7 +20,7 @@ class Board
     [1,1,1,1,2,2,2,3,3,4].map {|size| Ship.new(size) }
   end
 
-  def place_ship
+  def place_ships
     # loop through ships, put it randomly on a board, check that position is legal and move on
     # ship = ships[0]
     
@@ -50,24 +51,30 @@ class Board
 
     rows[3][8] = 's'
     rows[4][8] = 's'
-    
-    #   ship_coords = []
-    #   ship_coords << [rand(10), rand(10)]
-    #   (ship.size-1).times do
-    #   ship_coords << [ship_coords.last[0] + 1, ship_coords.last[1]]  if ship.vertical?
-    #   ship_coords << [ship_coords.last[0], ship_coords.last[1] + 1] if ship.horizontal?
-    #   end
-    #   # ship_coords.each do |coord|
-    #   #   if rows[coord[0]][coord[1]] == 's' 
-    #   # end
-    #   # if rows[coords[0]][coords[1]] == 's'
       
-    #   # ship.coords += ship_coords
+      
+  #   ships.each do |ship|
+  #     loop do
+  #       coords = get_ship_coords(ship)
+  #       test_coords = coords.map {|coords| rows[coords[0]][coords[1]] }
+  #       next if test_coords.include?('s') || test_coords.include?(nil)
+  #       test_coords.each {|coords| rows[coords[0]][coords[1]] = 's' }
+  #       break
+  #     end
+  #   end
+  # end
 
 
-    #   ship_coords.each {|coords| rows[coords[0]][coords[1]] = 's' }
- 
-    # end
+
+
+  def get_ship_coords(ship)
+    ship_coords = []
+    ship_coords << [rand(10), rand(10)]
+    (ship.size-1).times do
+      ship_coords << [ship_coords.last[0] + 1, ship_coords.last[1]]  if ship.vertical?
+      ship_coords << [ship_coords.last[0], ship_coords.last[1] + 1] if ship.horizontal?
+    end
+    ship_coords
   end
 
 
