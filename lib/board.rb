@@ -55,25 +55,26 @@ class Board
   ships.each do |ship|
     while true
       coords = get_ship_coords(ship)
+      next if coords.flatten.include?(10)
       cells = coords.map { |coord| rows[coord.first][coord.last]}
       if cells.include?('s')
         next
       else
-        fill_with_ships(coords)
+        fill_ship(coords)
         break
       end
     end
   end
 end
   
-  def fill_with_ships(coords)
+  def fill_ship(coords)
     coords.each { |coord| rows[coord.first][coord.last] = 's' }
   end
 
 
   def get_ship_coords(ship)
     ship_coords = []
-    ship_coords << [rand(6), rand(6)]
+    ship_coords << [rand(10), rand(10)]
     (ship.size-1).times do
       ship_coords << [ship_coords.last.first + 1, ship_coords.last.last]  if ship.vertical?
       ship_coords << [ship_coords.last.first, ship_coords.last.last+ 1] if ship.horizontal?
