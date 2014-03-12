@@ -4,6 +4,10 @@ describe Player do
   let(:bob) { Player.new('Bob') }
   let(:alice) { Player.new('Alice') }
   
+  before(:each) do
+    bob.board.empty_the_board
+  end
+
   it 'has a name' do 
     expect(bob.name).to eq 'Bob'
   end
@@ -20,7 +24,6 @@ describe Player do
   end
 
   it "should know when all ships are sunk" do
-   bob.board.empty_the_board
    bob.board.rows[1][1] = 's'
    bob.board.rows[1][2] = 's' 
    bob.board.rows[1][3] = 's'
@@ -37,8 +40,8 @@ describe Player do
   end
 
   it 'should be able to miss' do
-    bob.shoot([1,1], alice.board)
-    expect(alice.board.rows[1][1]).to eq 'o'
+    alice.shoot([1,1], bob.board)
+    expect(bob.board.rows[1][1]).to eq 'o'
   end
 
 end

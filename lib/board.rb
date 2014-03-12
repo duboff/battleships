@@ -22,62 +22,66 @@ class Board
 
   def place_ships
     # loop through ships, put it randomly on a board, check that position is legal and move on
-    # ship = ships[0]
-    
-    # ships.each do |ship|
-    rows[0][0] = 's'
-    rows[5][7] = 's'
-    rows[3][3] = 's'
-    rows[4][4] = 's'
+  
+  #   rows[0][0] = 's'
+  #   rows[5][7] = 's'
+  #   rows[3][3] = 's'
+  #   rows[4][4] = 's'
 
-    rows[9][0] = 's'
-    rows[9][1] = 's'
-    rows[9][2] = 's'
-    rows[9][3] = 's'
+  #   rows[9][0] = 's'
+  #   rows[9][1] = 's'
+  #   rows[9][2] = 's'
+  #   rows[9][3] = 's'
 
-    rows[7][1] = 's'
-    rows[7][2] = 's'
-    rows[7][3] = 's'
+  #   rows[7][1] = 's'
+  #   rows[7][2] = 's'
+  #   rows[7][3] = 's'
 
-    rows[0][9] = 's'
-    rows[1][9] = 's'
-    rows[2][9] = 's'
+  #   rows[0][9] = 's'
+  #   rows[1][9] = 's'
+  #   rows[2][9] = 's'
 
-    rows[7][8] = 's'
-    rows[8][8] = 's'
+  #   rows[7][8] = 's'
+  #   rows[8][8] = 's'
 
-    rows[2][1] = 's'
-    rows[3][1] = 's'  
+  #   rows[2][1] = 's'
+  #   rows[3][1] = 's'  
 
-    rows[3][8] = 's'
-    rows[4][8] = 's'
+  #   rows[3][8] = 's'
+  #   rows[4][8] = 's'
 
-  end
-      
-      
-  #   ships.each do |ship|
-  #     loop do
-  #       coords = get_ship_coords(ship)
-  #       test_coords = coords.map {|coords| rows[coords[0]][coords[1]] }
-  #       next if test_coords.include?('s') || test_coords.include?(nil)
-  #       test_coords.each {|coords| rows[coords[0]][coords[1]] = 's' }
-  #       break
-  #     end
-  #   end
   # end
 
-
+  ships.each do |ship|
+    while true
+      coords = get_ship_coords(ship)
+      cells = coords.map { |coord| rows[coord.first][coord.last]}
+      if cells.include?('s')
+        next
+      else
+        fill_with_ships(coords)
+        break
+      end
+    end
+  end
+end
+  
+  def fill_with_ships(coords)
+    coords.each { |coord| rows[coord.first][coord.last] = 's' }
+  end
 
 
   def get_ship_coords(ship)
     ship_coords = []
-    ship_coords << [rand(10), rand(10)]
+    ship_coords << [rand(6), rand(6)]
     (ship.size-1).times do
-      ship_coords << [ship_coords.last[0] + 1, ship_coords.last[1]]  if ship.vertical?
-      ship_coords << [ship_coords.last[0], ship_coords.last[1] + 1] if ship.horizontal?
+      ship_coords << [ship_coords.last.first + 1, ship_coords.last.last]  if ship.vertical?
+      ship_coords << [ship_coords.last.first, ship_coords.last.last+ 1] if ship.horizontal?
     end
     ship_coords
   end
+
+
 
 
   # This method should register the shot at the coordinates passed
@@ -125,5 +129,10 @@ class Board
 
 end
 
-# board = Board.new(Player.new('Bob'))
+# bob = Player.new('Bob')
+# board = Board.new(bob)
+
+# ship = Ship.new(4)
+
+# puts get_ship_coords(ship)
 
